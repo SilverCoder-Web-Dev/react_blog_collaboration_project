@@ -1,0 +1,61 @@
+{
+  "posts": 
+  [
+  {
+    "id": "1",
+    "title": "Mastering TypeScript in React",
+    "createdAt": "2024-06-10T08:30:00Z",
+    "body": "Thank you Jesus",
+    "updatedAt": "2024-06-11T14:22:00Z"
+  },
+  {
+    "id": "2",
+    "title": "Building Scalable React Apps",
+    "createdAt": "2024-06-12T09:15:00Z",
+    "body": "Thank you Jesus",
+    "updatedAt": "2024-06-13T16:40:00Z"
+  },
+  {
+    "id": "3",
+    "title": "State Management with Zustand",
+    "createdAt": "2024-06-14T11:05:00Z",
+    "body": "Thank you Jesus",
+    "updatedAt": "2024-06-15T18:30:00Z"
+  },
+  {
+    "id": "4",
+    "title": "React Query for Data Fetching",
+    "createdAt": "2024-06-16T13:20:00Z",
+    "body": "Thank you Jesus",
+    "updatedAt": "2024-06-17T09:10:00Z"
+  },
+  {
+    "id": "5",
+    "title": "Creating Reusable Component Libraries",
+    "createdAt": "2024-06-18T10:00:00Z",
+    "body": "Thank you Jesus",
+    "updatedAt": "2024-06-19T14:55:00Z"
+  },
+  {
+    "id": "6",
+    "title": "Optimizing Performance in React",
+    "createdAt": "2024-06-20T15:45:00Z",
+    "body": "Thank you Jesus",
+    "updatedAt": "2024-06-21T11:25:00Z"
+  },
+  {
+    "id": "7",
+    "title": "Testing React Components with Vitest",
+    "createdAt": "2024-06-22T08:50:00Z",
+    "body": "Thank you Jesus",
+    "updatedAt": "2024-06-23T17:05:00Z"
+  },
+  {
+    "id": "8",
+    "title": "Deploying React Apps with Vercel",
+    "createdAt": "2024-06-24T12:30:00Z",
+    "body": "Thank you Jesus",
+    "updatedAt": "2024-06-25T13:45:00Z"
+  }
+]
+}
