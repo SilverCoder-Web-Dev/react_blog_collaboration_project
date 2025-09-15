@@ -2,6 +2,7 @@ import {Routes, Route,} from "react-router-dom";
 import  Layout  from "./layouts/Layout";
 import Dashboard  from "./components/DashBoard";
 import { SidebarProvider } from './contexts/SidebarContext';
+import CreatePost from "./components/CreatePost";
 
 function App() {
   return (
@@ -12,6 +13,11 @@ function App() {
               <Route/>
               {/*Admin Dashboard*/}
               <Route path="/dashboard" element={<Layout><Dashboard/></Layout>}/>
+              
+              {/*Create Post*/}
+              <Route path="/create-post" element={<Layout><CreatePost/></Layout>} />
+              {/*Manage Post*/}
+
               <Route/>
           </Routes>
       </SidebarProvider>

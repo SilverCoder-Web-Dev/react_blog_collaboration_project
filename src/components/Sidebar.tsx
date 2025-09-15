@@ -1,14 +1,14 @@
 import React from 'react';
 import {
   MdDashboard,
-  MdArticle,
-  MdPeople,
-  MdSettings,
+  MdManageSearch,
+  MdPostAdd,
   MdClose,
   MdMenu
 } from 'react-icons/md';
 import '../styles.css';
 import { useSidebar } from '../contexts/SidebarContext';
+import { Link } from 'react-router-dom';
 
 const Sidebar: React.FC = () => {
   const { isOpen, toggleSidebar } = useSidebar();
@@ -33,28 +33,22 @@ const Sidebar: React.FC = () => {
       <nav className="sidebar-nav" aria-label="Sidebar menu">
         <ul>
           <li>
-            <a href="/" className="nav-link">
+            <Link to="/dashboard" className="nav-link">
               <MdDashboard size={20} />
               <span className={isOpen ? 'visible' : 'hidden'}>Dashboard</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/posts" className="nav-link">
-              <MdArticle size={20} />
-              <span className={isOpen ? 'visible' : 'hidden'}>Posts</span>
-            </a>
+            <Link to="/manage-posts" className="nav-link">
+              <MdManageSearch size={20} />
+              <span className={isOpen ? 'visible' : 'hidden'}>Manage Posts</span>
+            </Link>
           </li>
           <li>
-            <a href="/users" className="nav-link">
-              <MdPeople size={20} />
-              <span className={isOpen ? 'visible' : 'hidden'}>Users</span>
-            </a>
-          </li>
-          <li>
-            <a href="/settings" className="nav-link">
-              <MdSettings size={20} />
-              <span className={isOpen ? 'visible' : 'hidden'}>Settings</span>
-            </a>
+            <Link to="/create-post" className="nav-link">
+              <MdPostAdd size={20} />
+              <span className={isOpen ? 'visible' : 'hidden'}>Create Posts</span>
+            </Link>
           </li>
         </ul>
       </nav>

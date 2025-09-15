@@ -4,13 +4,14 @@ import axios from "axios";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 /* ======= Define Post Interface ====== */
+
 export interface IPost {
-    id: string;
-    title: string;
-    body: string;
-    image_name: string;
-    createdAt: string;  // Creation timestamp
-    updatedAt: string;  // Last update timestamp
+  id: string;
+  title: string;
+  body: string;
+  imageData: string;         // 👈 Base64 image data
+  createdAt: string;
+  updatedAt: string;
 }
 
 /* ======= Create Post Function ====== */
@@ -36,14 +37,14 @@ export const createPost = async (
 /* ======= Update Post Function ====== */
 export const updatePost = async (
     postId: string,
-    postData: Omit<IPost, "id" | "createdAt">
+    postData: Partial<IPost>
 ): Promise<IPost> => {
     try {
         const updatedPost = {
             ...postData,
             updatedAt: new Date().toISOString(), // Only update this field
         };
-        const response = await axios.put<IPost>(`${API_BASE_URL}/posts/${postId}`, updatedPost);
+        const response = await axios.patch<IPost>(`${API_BASE_URL}/posts/${postId}`, updatedPost);
         return response.data;
     } catch (error) {
         console.error(`Error Updating Post:`, error);
