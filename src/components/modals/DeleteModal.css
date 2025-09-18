@@ -1,0 +1,117 @@
+/* ========== DELETE MODAL ========== */
+
+.delete-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  animation: delete-modal-fadeIn 0.3s ease;
+}
+
+@keyframes delete-modal-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.delete-modal-content {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: delete-modal-slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes delete-modal-slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.delete-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.delete-modal-close:hover {
+  color: #1e293b;
+  background: #f1f5f9;
+}
+
+.delete-modal-icon {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #ef4444;
+}
+
+.delete-modal-content h3 {
+  text-align: center;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.delete-modal-content p {
+  text-align: center;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.delete-modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.delete-modal-btn-cancel,
+.delete-modal-btn-delete {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.delete-modal-btn-cancel {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.delete-modal-btn-cancel:hover {
+  background: #e2e8f0;
+}
+
+.delete-modal-btn-delete {
+  background: #ef4444;
+  color: white;
+}
+
+.delete-modal-btn-delete:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}

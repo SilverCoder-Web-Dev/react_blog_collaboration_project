@@ -1,0 +1,33 @@
+/* Post List Styles */
+.post-list-grid {
+  display: grid;
+  gap: 2rem;
+  /* grid-template-columns: repeat(1, minmax(0, 1fr)); */
+}
+
+@media (min-width: 768px) {
+  .post-list-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .post-list-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.no-posts-message {
+  text-align: center;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: #6b7280;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .no-posts-message {
+    color: #9ca3af;
+  }
+}

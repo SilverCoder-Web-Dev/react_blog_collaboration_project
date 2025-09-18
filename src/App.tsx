@@ -1,19 +1,29 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home";
-import Post from "./pages/Post";
+import { Routes, Route, } from "react-router-dom";
+import Layout from "./layouts/Layout";
+import Dashboard from "./components/DashBoard";
+import { SidebarProvider } from './contexts/SidebarContext';
+import CreatePost from "./components/CreatePost";
+import Homepage from "./pages/Home";
 
 function App() {
   return (
-    <h1>Hello world</h1>
-    // <Router>
-    //   <nav>
-    //     <Link to="/">Home</Link> | <Link to="/post/1">Sample Post</Link>
-    //   </nav>
-    //   <Routes>
-    //     <Route path="/" element={<Home />} />
-    //     <Route path="/post/:id" element={<Post />} />
-    //   </Routes>
-    // </Router>
+    <>
+      <SidebarProvider>
+        <Routes>
+          {/* Blog Site url route */}
+          {/*Admin Dashboard*/}
+          <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
+
+          {/*Create Post*/}
+          <Route path="/create-post" element={<Layout><CreatePost /></Layout>} />
+          {/*Manage Post*/}
+
+          <Route path="/" element={<Homepage onPostClick={function (): void {
+            throw new Error("Function not implemented.");
+          }} />} />
+        </Routes>
+      </SidebarProvider>
+    </>
   );
 }
 
