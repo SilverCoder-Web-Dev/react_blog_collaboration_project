@@ -1,9 +1,9 @@
-import {Routes, Route,} from "react-router-dom";
-import  Layout  from "./layouts/Layout";
-import Dashboard  from "./components/DashBoard";
+import { Routes, Route, } from "react-router-dom";
+import Layout from "./layouts/Layout";
+import Dashboard from "./components/DashBoard";
 import { SidebarProvider } from './contexts/SidebarContext';
 import CreatePost from "./components/CreatePost";
-import ManagePosts from "./components/ManagePosts";
+import Homepage from "./pages/Home";
 
 function App() {
   return (
@@ -17,12 +17,12 @@ function App() {
               
               {/*Create Post*/}
               <Route path="/create-post" element={<Layout><CreatePost/></Layout>} />
-
               {/*Manage Post*/}
-              <Route path="/manage-posts" element={<Layout><ManagePosts/></Layout>}/>
 
-              <Route/>
-          </Routes>
+          <Route path="/" element={<Homepage onPostClick={function (): void {
+            throw new Error("Function not implemented.");
+          }} />} />
+        </Routes>
       </SidebarProvider>
     </>
   );
