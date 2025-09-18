@@ -14,7 +14,8 @@ import {
   MdOutlineStickyNote2,
   MdMenu,
   MdEdit,
-  MdDelete
+  MdDelete,
+  MdAccessTime
 } from 'react-icons/md';
 import { BiNote } from 'react-icons/bi';
 import { useSidebar } from '../contexts/SidebarContext'; // 👈 Import context
@@ -224,7 +225,10 @@ const Dashboard: React.FC = () => {
       {/* POSTS TABLE */}
       <div className="posts-section">
         <div className="section-header">
-          <h2>📝 Recent Posts</h2>
+          <div className="section-header-title">
+            <MdAccessTime size={36} color="#3B82F6" className='recents-icon'/>
+            <h2>Recent Posts</h2>
+          </div>
           <span className="post-count">Showing {Math.min(5, posts.length)} of {posts.length}</span>
         </div>
 
