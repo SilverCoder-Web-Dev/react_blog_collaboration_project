@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { MdClose, MdTitle, MdDescription, MdImage, MdSave } from 'react-icons/md';
+import {
+  MdClose,
+  MdTitle,
+  MdDescription,
+  MdImage,
+  MdSave,
+  MdModeEdit,
+  MdCloudUpload,
+  MdCheckCircle,
+  MdError,
+} from 'react-icons/md';
 import { updatePost } from '../../services/apiHandling';
 import type { IPost } from '../../services/apiHandling';
 import './EditModal.css';
+import '../../styles.css';
 
 interface EditModalProps {
   isOpen: boolean;
@@ -17,10 +28,15 @@ const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, post, onPostUpda
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(post.imageData || null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [modal, setModal] = useState<{
-    type: 'success' | 'error' | null;
+  const [alertModal, setAlertModal] = useState<{
+    isOpen: boolean;
+    type: 'success' | 'error';
     message: string;
-  }>({ type: null, message: '' });
+  }>({
+    isOpen: false,
+    type: 'success',
+    message: '',
+  });
 
   // Prefill form when post changes
   useEffect(() => {
@@ -33,7 +49,7 @@ const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, post, onPostUpda
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       if (!file.type.startsWith('image/')) {
-        setModal({ type: 'error', message: 'Please select an image file' });
+        showAlert('error', 'Please select an image file');
         return;
       }
       setImageFile(file);
@@ -41,172 +57,198 @@ const EditModal: React.FC<EditModalProps> = ({ isOpen, onClose, post, onPostUpda
     }
   };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+  const showAlert = (type: 'success' | 'error', message: string) => {
+    setAlertModal({ isOpen: true, type, message });
+  };
+
+  const closeAlert = () => {
+    setAlertModal((prev) => ({ ...prev, isOpen: false }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-        // Start with existing image data (fallback to empty string)
-        let imageData = post.imageData || '';
+      let imageData = post.imageData || '';
 
-        // If new image selected, convert to Base64
-        if (imageFile) {
+      if (imageFile) {
         imageData = await new Promise<string>((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(imageFile);
-            reader.onload = () => resolve(reader.result as string);
-            reader.onerror = reject;
+          const reader = new FileReader();
+          reader.readAsDataURL(imageFile);
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = reject;
         });
-        }
+      }
 
-        // Define update data shape explicitly
-        type UpdatePostData = Omit<IPost, 'id' | 'createdAt'>;
-        const updatedPostData: UpdatePostData = {
+      type UpdatePostData = Omit<IPost, 'id' | 'createdAt'>;
+      const updatedPostData: UpdatePostData = {
         title,
         body,
         imageData,
         updatedAt: new Date().toISOString(),
-        };
+      };
 
-        // Call API
-        const updatedPost = await updatePost(post.id, updatedPostData);
+      const updatedPost = await updatePost(post.id, updatedPostData);
 
-        setModal({
-        type: 'success',
-        message: `🎉 Post "${updatedPost.title}" updated successfully!`,
-        });
+      showAlert('success', `🎉 Post "${updatedPost.title}" updated successfully!`);
 
-        // Notify parent to update state
-        onPostUpdated(updatedPost);
+      onPostUpdated(updatedPost);
 
-        // Auto-close after 2 seconds
+      // Auto-close success after 2s
+      if (alertModal.type === 'success') {
         setTimeout(() => {
-        onClose();
+          closeAlert();
+          onClose();
         }, 2000);
+      }
     } catch (error) {
-        console.error('Failed to update post:', error);
-        setModal({
-        type: 'error',
-        message: 'Failed to update post. Please try again.',
-        });
+      console.error('Failed to update post:', error);
+      showAlert('error', 'Failed to update post. Please try again.');
     } finally {
-        setIsSubmitting(false);
+      setIsSubmitting(false);
     }
-    };
+  };
 
   const closeModal = () => {
-    setModal({ type: null, message: '' });
+    closeAlert();
     onClose();
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="edit-modal-overlay" onClick={closeModal}>
-      <div className="edit-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
-          <h2>
-            <MdTitle size={24} />
-            Edit Post
-          </h2>
-          <button className="close-btn" onClick={closeModal} aria-label="Close modal">
-            <MdClose size={24} />
-          </button>
-        </div>
+    <>
+      <div className="edit-modal-overlay" onClick={closeModal}>
+        <div className="edit-modal" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-header">
+            <h2>
+              <MdModeEdit size={24} />
+              Edit Post
+            </h2>
+            <button className="close-btn" onClick={closeModal} aria-label="Close modal">
+              <MdClose size={24} />
+            </button>
+          </div>
 
-        <form onSubmit={handleSubmit} className="edit-post-form">
-          {modal.type && (
-            <div className={`feedback-toast ${modal.type}`}>
-              <p>{modal.message}</p>
+          <form onSubmit={handleSubmit} className="edit-post-form">
+            <div className="form-group">
+              <label htmlFor="title">
+                <MdTitle size={12} />
+                Title
+              </label>
+              <input
+                type="text"
+                id="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Enter post title"
+                required
+              />
             </div>
-          )}
 
-          <div className="form-group">
-            <label htmlFor="title">
-              <MdTitle size={18} />
-              Title
-            </label>
-            <input
-              type="text"
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Enter post title"
-              required
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="body">
+                <MdDescription size={12} />
+                Body
+              </label>
+              <textarea
+                id="body"
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
+                placeholder="Write your post content..."
+                rows={6}
+                required
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="body">
-              <MdDescription size={18} />
-              Body
-            </label>
-            <textarea
-              id="body"
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
-              placeholder="Write your post content..."
-              rows={6}
-              required
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="image" className="image-label">
+                <MdImage size={12} />
+                Upload Image (Optional)
+              </label>
 
-          <div className="form-group">
-            <label htmlFor="image" className="image-label">
-              <MdImage size={18} />
-              Upload Image (Optional)
-            </label>
-            <input
-              type="file"
-              id="image"
-              accept="image/*"
-              onChange={handleImageChange}
-            />
+              <input
+                type="file"
+                id="image"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="file-input-hidden"
+                aria-label="Upload post image"
+              />
 
-            {imagePreview && (
-              <div className="image-preview-container">
-                <img src={imagePreview} alt="Preview" className="image-preview" />
-                <button
-                  type="button"
-                  className="remove-image-btn"
-                  onClick={() => {
-                    setImageFile(null);
-                    setImagePreview(null);
-                  }}
-                >
-                  &times;
-                </button>
-              </div>
+              <label htmlFor="image" className="file-upload-label">
+                <MdCloudUpload size={20} />
+                <span>{imageFile ? `✅ ${imageFile.name}` : 'Choose Image'}</span>
+              </label>
+
+              {imagePreview && (
+                <div className="image-preview-container">
+                  <img src={imagePreview} alt="Preview" className="image-preview" />
+                  <button
+                    type="button"
+                    className="remove-image-btn"
+                    onClick={() => {
+                      setImageFile(null);
+                      setImagePreview(null);
+                    }}
+                  >
+                    &times;
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <div className="modal-actions">
+              <button
+                type="button"
+                className="btn-cancel"
+                onClick={closeModal}
+                disabled={isSubmitting}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="btn-submit"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <span className="loading">Saving...</span>
+                ) : (
+                  <>
+                    <MdSave size={18} />
+                    Save Changes
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      {/* ALERT MODAL POPUP */}
+      {alertModal.isOpen && (
+        <div className="alert-modal-overlay" onClick={closeAlert}>
+          <div className="alert-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="alert-icon">
+              {alertModal.type === 'success' ? (
+                <MdCheckCircle size={48} className="icon-success" />
+              ) : (
+                <MdError size={48} className="icon-error" />
+              )}
+            </div>
+            <h3 className={alertModal.type}>{alertModal.type === 'success' ? 'Success!' : 'Error!'}</h3>
+            <p>{alertModal.message}</p>
+            {alertModal.type === 'error' && (
+              <button className="alert-btn" onClick={closeAlert}>
+                OK
+              </button>
             )}
           </div>
-
-          <div className="modal-actions">
-            <button
-              type="button"
-              className="btn-cancel"
-              onClick={closeModal}
-              disabled={isSubmitting}
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="btn-submit"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <span className="loading">Saving...</span>
-              ) : (
-                <>
-                  <MdSave size={18} />
-                  Save Changes
-                </>
-              )}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 };
 
