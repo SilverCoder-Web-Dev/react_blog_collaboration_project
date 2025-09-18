@@ -111,15 +111,16 @@
 }
 
 .posts-table th {
-  background: #f8fafc;
+  background: linear-gradient(90deg, #EFF6FF, #DBEAFE, #EFF6FF);
   padding: 1rem;
   text-align: left;
   font-weight: 600;
-  color: #334155;
+  color: var(--primary-dark);
   text-transform: uppercase;
   font-size: 0.85rem;
   letter-spacing: 0.5px;
   border-bottom: 2px solid #e2e8f0;
+  border-top: 2px solid #e2e8f0;
 }
 
 .posts-table td {

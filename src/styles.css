@@ -164,10 +164,18 @@ body {
   gap: 1rem;
 }
 
-.section-header h2 {
+.section-header-title{
+  display: flex;
+}
+
+/* .recents-icon{
+} */
+
+.section-header-title h2 {
   font-size: 1.75rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--primary-dark);
+  padding-left: 0.7rem;
 }
 
 .post-count {
@@ -195,7 +203,7 @@ body {
 }
 
 .modern-table th {
-  background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+  background: linear-gradient(90deg, #EFF6FF, #DBEAFE, #EFF6FF);
   padding: 1.25rem 1rem;
   text-align: left;
   font-weight: 600;
@@ -204,6 +212,7 @@ body {
   letter-spacing: 0.5px;
   font-size: 0.8rem;
   border-bottom: 2px solid var(--border);
+  border-top: 2px solid var(--border);
 }
 
 .modern-table td {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getPosts } from '../services/apiHandling';
 import type { IPost } from '../services/apiHandling';
-import { MdSearch, MdEdit, MdDelete, MdManageSearch, MdMenu } from 'react-icons/md';
+import { MdSearch, MdEdit, MdDelete, MdManageSearch, MdMenu, MdOutlineStickyNote2 } from 'react-icons/md';
 import EditModal from './modals/EditModal';
 import DeleteModal from './modals/DeleteModal';
 import './ManagePosts.css';
@@ -95,6 +95,20 @@ const ManagePosts: React.FC = () => {
   if (loading) {
     return (
       <div className="manage-posts">
+        {!isOpen && windowWidth <= 768 && (
+                      <button
+                        className="mobile-open-sidebar-btn force-show"
+                        onClick={toggleSidebar}
+                        aria-label="Open sidebar"
+                      >
+                        <MdMenu size={20} />
+                      </button> )}
+                      {isOpen && (
+                          <div
+                            className="sidebar-backdrop show"
+                            onClick={toggleSidebar} // clicking outside closes sidebar
+                          ></div>
+                      )}
         <div className="manage-page-header">
             <MdManageSearch size={50} className="header-icon" />
             <h1>Manage Posts</h1>
@@ -107,6 +121,20 @@ const ManagePosts: React.FC = () => {
   if (error) {
     return (
       <div className="manage-posts">
+        {!isOpen && windowWidth <= 768 && (
+                      <button
+                        className="mobile-open-sidebar-btn force-show"
+                        onClick={toggleSidebar}
+                        aria-label="Open sidebar"
+                      >
+                        <MdMenu size={20} />
+                      </button> )}
+                      {isOpen && (
+                          <div
+                            className="sidebar-backdrop show"
+                            onClick={toggleSidebar} // clicking outside closes sidebar
+                          ></div>
+                      )}
         <div className="manage-page-header">
             <MdManageSearch size={50} className="header-icon" />
             <h1>Manage Posts</h1>
@@ -178,6 +206,7 @@ const ManagePosts: React.FC = () => {
                 <tr key={post.id} className="table-row">
                   <td className="title-cell">
                     <div className="title-wrapper">
+                      <MdOutlineStickyNote2 size={18} color="#3B82F6" />
                       <span>{post.title}</span>
                     </div>
                   </td>
