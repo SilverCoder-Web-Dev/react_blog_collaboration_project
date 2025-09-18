@@ -3,6 +3,7 @@ import Layout from "./layouts/Layout";
 import Dashboard from "./components/DashBoard";
 import { SidebarProvider } from './contexts/SidebarContext';
 import CreatePost from "./components/CreatePost";
+import Homepage from "./pages/Home";
 
 function App() {
   return (
