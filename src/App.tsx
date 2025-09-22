@@ -21,7 +21,7 @@ function App() {
 
           <Route path="/" element={<Homepage onPostClick={function (): void {
             throw new Error("Function not implemented.");
-          }} />} />
+          } } posts={[]} />} />
         </Routes>
       </SidebarProvider>
     </>

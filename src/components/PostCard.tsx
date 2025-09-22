@@ -5,7 +5,7 @@ import type { IPost } from '../services/apiHandling';
 // Define the props interface for PostCard.
 interface IPostCardProps {
   post: IPost;
-  onPostClick: () => void;
+  onPostClick: (post: IPost) => void;
   onEdit?: (post: IPost) => void;
   onDelete?: (postId: string) => void;
 }
@@ -15,7 +15,7 @@ interface IPostCardProps {
 const PostCard: React.FC<IPostCardProps> = ({ post, onPostClick }) => {
   return (
     <div
-      onClick={() => onPostClick()}
+      onClick={() => onPostClick(post)}
       
       className="post-card-container"
     >

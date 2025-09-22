@@ -6,7 +6,7 @@ import './PostList.css';
 // Define the props interface for PostList.
 interface IPostListProps {
   posts: IPost[];
-  onPostClick: () => void;
+  onPostClick: (post: IPost) => void;
   onEdit?: (post: IPost) => void;
   onDelete?: (postId: string) => void;
 }

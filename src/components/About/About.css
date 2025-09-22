@@ -1,0 +1,33 @@
+.about-container {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3rem 1.5rem;
+    background-color: #fff;
+    /* border-radius: 1rem; */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    line-height: 1.75;
+    color: dimgray;
+}
+
+.about-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1.25;
+    color: slateblue;
+    margin-bottom: 1.5rem;
+    padding-top: 1rem;
+    text-align: center;
+}
+
+.about-subtitle {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: gray;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.about-body p {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}

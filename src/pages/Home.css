@@ -39,8 +39,9 @@
 }
 
 .homepage-header {
+  /* height: 10rem; */
   text-align: center;
-  margin-bottom: 4rem;
+  margin: 4rem;
 }
 
 .homepage-title {
@@ -79,4 +80,15 @@
   .homepage-subtitle {
     color: #9ca3af;
   }
+}
+
+
+.homepage-button {
+  padding: 0.75rem 0.9rem;
+  margin-top: 2rem;
+  border: 1px solid #154ec9;
+  color: #154ec9;
+  background: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
 }

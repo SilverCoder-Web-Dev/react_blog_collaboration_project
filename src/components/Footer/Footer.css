@@ -1,0 +1,13 @@
+.footer-container {
+    padding: 2rem 1rem;
+    text-align: center;
+    background-color: #999;
+    border-top: 1px solid #777;
+    color: #fff;
+    font-size: 0.875rem;
+    margin-top: auto;
+}
+
+.footer-container p {
+    margin: 0;
+}
