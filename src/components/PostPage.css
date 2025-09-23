@@ -1,7 +1,7 @@
 /* ========== POST PAGE ========== */
 
 .post-page {
-  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+  background-color: #f3f4f6;
   min-height: 100vh;
   padding: 2rem 0;
 }
