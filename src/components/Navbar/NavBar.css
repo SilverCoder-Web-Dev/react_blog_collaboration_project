@@ -1,11 +1,11 @@
-/* ========== NAVBAR ========== */
+/* ========== NAVBAR — FRESH FROM SCRATCH ========== */
 
 .navbar-container {
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(219, 234, 254, 0.6);
-    padding: 1rem;
+    padding: 0.75rem 1rem;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -14,7 +14,7 @@
     margin-bottom: 1rem;
 }
 
-/* Tech-inspired circuit accent */
+/* Tech-inspired animated top border */
 .navbar-container::before {
     content: '';
     position: absolute;
@@ -23,8 +23,11 @@
     width: 100%;
     height: 3px;
     background: linear-gradient(90deg, transparent, #818cf8, #c084fc, #93c5fd, transparent);
+    background-size: 300% 100%;
+    animation: navbarGradientShift 6s ease-in-out infinite;
 }
 
+/* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
     .navbar-container {
         background: rgba(15, 23, 42, 0.85);
@@ -37,16 +40,58 @@
     }
 }
 
+/* Navbar Content — Always Row */
 .navbar-content {
     max-width: 80rem;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
     display: flex;
+    flex-direction: row; /* 👈 Always horizontal */
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 0;
-    flex-wrap: wrap;
     gap: 1rem;
+    padding: 0;
+    overflow-x: auto; /* Allow horizontal scroll if needed */
+    -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+    scrollbar-width: none; /* Hide scrollbar */
+}
+
+.navbar-content > div{
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Hide scrollbar in WebKit */
+.navbar-content::-webkit-scrollbar {
+    display: none;
+}
+
+/* Optional: Fade indicator for scrollable content */
+.navbar-content {
+    position: relative;
+}
+
+.navbar-content::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40px;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8));
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.navbar-content:hover::after {
+    opacity: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+    .navbar-content::after {
+        background: linear-gradient(to right, transparent, rgba(15, 23, 42, 0.8));
+    }
 }
 
 /* Animated Gradient Title */
@@ -54,21 +99,16 @@
     font-size: 1.25rem;
     font-weight: 800;
     letter-spacing: -0.025em;
-    background: linear-gradient(
-            90deg,
-            #818cf8,
-            #c084fc,
-            #93c5fd,
-            #f0abfc
-    );
+    background: linear-gradient(90deg, #818cf8, #c084fc, #93c5fd, #f0abfc);
     background-size: 300% 100%;
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    animation: gradientShift 6s ease-in-out infinite;
+    white-space: nowrap;
+    flex-shrink: 0; /* Don't shrink title */
+    animation: navbarGradientShift 6s ease-in-out infinite;
     position: relative;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    white-space: nowrap;
 }
 
 .navbar-title:hover {
@@ -77,8 +117,8 @@
 
 /* Buttons */
 .navbar-content .btn {
-    padding: 0.65rem 1.25rem;
-    margin-right: 0.5rem;
+    padding: 0.65rem 1rem;
+    margin: 0;
     background: linear-gradient(135deg, rgba(129, 140, 248, 0.1), rgba(192, 132, 252, 0.1));
     border: 1px solid rgba(129, 140, 248, 0.3);
     color: #4f46e5;
@@ -86,11 +126,16 @@
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
     backdrop-filter: blur(4px);
-    min-width: 100px;
-    text-align: center;
+    white-space: nowrap;
+    min-width: 80px;
+    min-height: 44px; /* Touch target */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 1; /* Allow to shrink if needed */
 }
 
 .navbar-content .btn:hover {
@@ -104,7 +149,7 @@
     transform: translateY(0);
 }
 
-/* Dark Mode */
+/* Dark Mode for Buttons */
 @media (prefers-color-scheme: dark) {
     .navbar-content .btn {
         background: linear-gradient(135deg, rgba(147, 197, 253, 0.1), rgba(240, 171, 252, 0.1));
@@ -120,56 +165,56 @@
     }
 }
 
-/* Responsive Adjustments */
+/* Responsive Scaling */
 @media (max-width: 768px) {
     .navbar-container {
-        padding: 0.75rem 1rem;
+        padding: 0.5rem 0.75rem;
         border-radius: 0 0 12px 12px;
     }
 
     .navbar-title {
         font-size: 1.1rem;
-        text-align: center;
-        flex: 1;
+    }
+
+    .navbar-content .btn {
+        padding: 0.6rem 0.9rem;
+        font-size: 0.85rem;
+        min-width: 70px;
     }
 
     .navbar-content {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 0.75rem 0;
-        gap: 0.75rem;
-    }
-
-    .navbar-content .btn {
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-        font-size: 0.9rem;
-        padding: 0.75rem 1rem;
-    }
-
-    /* Optional: Add subtle divider between items */
-    .navbar-content > *:not(:last-child) {
-        margin-bottom: 0.5rem;
+        gap: 0.5rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
     }
 }
 
-@media (min-width: 769px) and (max-width: 1023px) {
+@media (max-width: 480px) {
+    .navbar-container {
+        padding: 0.5rem 0.5rem;
+        border-radius: 0 0 10px 10px;
+    }
+
     .navbar-title {
-        font-size: 1.35rem;
+        font-size: 1rem;
     }
 
     .navbar-content .btn {
-        font-size: 0.95rem;
-        padding: 0.7rem 1.1rem;
-        margin-right: 0.5rem;
+        padding: 0.25rem 0.8rem;
+        font-size: 0.8rem;
+        min-width: 65px;
+    }
+
+    .navbar-content {
+        gap: 0.4rem;
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
     }
 }
 
 @media (min-width: 1024px) {
-    .navbar-content {
-        padding-left: 2rem;
-        padding-right: 2rem;
+    .navbar-container {
+        padding: 1rem 2rem;
     }
 
     .navbar-title {
@@ -181,103 +226,27 @@
         font-size: 1rem;
         min-width: 120px;
     }
-}
 
-/* Keyframes for Gradient Animation */
-@keyframes gradientShift {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
+    .navbar-content {
+        gap: 1.5rem;
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 
-/* Optional: Add floating effect */
-/*.navbar-title {
-    animation: gradientShift 6s ease-in-out infinite, float 3s ease-in-out infinite;
-}*/
+/* Keyframes */
+@keyframes navbarGradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-/*@keyframes float {
+/* Optional: Floating effect */
+.navbar-title {
+    animation: navbarGradientShift 6s ease-in-out infinite, navbarFloat 3s ease-in-out infinite;
+}
+
+@keyframes navbarFloat {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-2px); }
-}*/
-
-
-/* ========== PHONE VIEW — SINGLE LINE ========== */
-
-@media (max-width: 768px) {
-    .navbar-container {
-        padding: 0.5rem 0.75rem;
-        border-radius: 0 0 10px 10px;
-    }
-
-    .navbar-content {
-        padding: 0;
-        gap: 0.5rem;
-        flex-wrap: nowrap; /* Prevent wrapping */
-        overflow-x: auto; /* Allow horizontal scroll if needed */
-        -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
-        scrollbar-width: none; /* Hide scrollbar */
-    }
-
-    /* Hide scrollbar in WebKit */
-    .navbar-content::-webkit-scrollbar {
-        display: none;
-    }
-
-    .navbar-title {
-        font-size: 1.1rem;
-        white-space: nowrap;
-        min-width: fit-content;
-        flex-shrink: 0; /* Don't shrink title */
-        margin: 0;
-    }
-
-    .navbar-content .btn {
-        padding: 0.65rem 0.9rem;
-        font-size: 0.875rem;
-        min-width: 80px;
-        min-height: 44px; /* Touch target */
-        white-space: nowrap;
-        flex-shrink: 1; /* Allow buttons to shrink if needed */
-    }
-
-    /* Reduce gradient intensity on mobile */
-    .navbar-title {
-        background-size: 400% 100%;
-        animation-duration: 8s; /* Slower on mobile */
-    }
-
-    /* Optional: Add subtle left/right padding for breathing room */
-    .navbar-content {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-    }
-}
-
-/* Extra Small Phones (e.g., iPhone SE) */
-@media (max-width: 480px) {
-    .navbar-container {
-        padding: 0.5rem 0.5rem;
-    }
-
-    .navbar-title {
-        font-size: 1rem;
-    }
-
-    .navbar-content .btn {
-        padding: 0.6rem 0.8rem;
-        font-size: 0.8rem;
-        min-width: 70px;
-    }
-
-    .navbar-content {
-        gap: 0.4rem;
-        padding-left: 0.25rem;
-        padding-right: 0.25rem;
-    }
 }
