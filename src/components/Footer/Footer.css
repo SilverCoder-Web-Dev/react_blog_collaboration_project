@@ -1,0 +1,110 @@
+/* ========== FOOTER ========== */
+
+.footer-container {
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(219, 234, 254, 0.6);
+    color: #475569;
+    font-size: 0.95rem;
+    margin-top: auto;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Animated Gradient Accent Line */
+.footer-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #818cf8, #c084fc, #93c5fd, transparent);
+    background-size: 300% 100%;
+    animation: footerGradientShift 8s ease-in-out infinite;
+}
+
+/* Subtle Circuit Circle */
+.footer-container::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 60px;
+    height: 60px;
+    border: 2px solid rgba(129, 140, 248, 0.2);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.footer-container p {
+    margin: 0;
+    line-height: 1.6;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    .footer-container {
+        background: rgba(15, 23, 42, 0.85);
+        border-top-color: rgba(59, 130, 246, 0.3);
+        color: #cbd5e1;
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .footer-container::before {
+        background: linear-gradient(90deg, transparent, #93c5fd, #c084fc, #818cf8, transparent);
+    }
+
+    .footer-container::after {
+        border-color: rgba(147, 197, 253, 0.2);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-container {
+        padding: 2rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .footer-container p {
+        padding: 0 0.5rem;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+    .footer-container {
+        padding: 2.5rem 2rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .footer-container {
+        padding: 3rem 2rem;
+        font-size: 1rem;
+    }
+}
+
+/* Keyframes */
+@keyframes footerGradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Optional: Add subtle pulse to text on hover */
+.footer-container p:hover {
+    animation: footerPulse 1.5s ease-in-out;
+}
+
+@keyframes footerPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(1.02); }
+}
