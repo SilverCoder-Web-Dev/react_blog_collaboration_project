@@ -19,9 +19,7 @@ function App() {
               <Route path="/create-post" element={<Layout><CreatePost/></Layout>} />
               {/*Manage Post*/}
 
-          <Route path="/" element={<Homepage onPostClick={function (): void {
-            throw new Error("Function not implemented.");
-          } } posts={[]} />} />
+          <Route path="/" element={<Homepage />} />
         </Routes>
       </SidebarProvider>
     </>

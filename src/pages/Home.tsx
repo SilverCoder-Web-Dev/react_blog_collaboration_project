@@ -6,15 +6,23 @@ import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
 import NewsLetter from "../components/NewsLetter/NewsLetter";
 import About from "../components/About/About";
+import PostPage from "../components/PostPage";
 
 // Homepage component
-interface HomepageProps {
-  posts: IPost[];
-  onPostClick: (post: IPost) => void;
-}
+// export interface IPost {
+//   id: string;
+//   title: string;
+//   content: string;
+// }
 
-const Homepage: React.FC<HomepageProps> = ({ onPostClick }) => {
+// interface HomepageProps {
+//   posts: IPost[];
+//   onPostClick: (post: IPost) => void;
+// }
+
+const Homepage: React.FC = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
+  const [selectedPost, setSelectedPost] = useState<IPost | null>(null);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -23,6 +31,13 @@ const Homepage: React.FC<HomepageProps> = ({ onPostClick }) => {
     };
     fetchPosts();
   }, []);
+
+  // show single post page if one is selected
+  if (selectedPost) {
+    return (
+      <PostPage post={selectedPost} onBack={() => setSelectedPost(null)} />
+    );
+  }
 
   return (
     <div className="homepage-container">
@@ -44,7 +59,7 @@ const Homepage: React.FC<HomepageProps> = ({ onPostClick }) => {
           <button className="homepage-button">View our Work</button>
 
         </header>
-        <PostList posts={posts} onPostClick={onPostClick} />
+        <PostList posts={posts} onPostClick={setSelectedPost} />
       </div>
       <NewsLetter/>
       <About/>
