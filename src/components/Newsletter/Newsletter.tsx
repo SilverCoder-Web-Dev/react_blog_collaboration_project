@@ -1,20 +1,13 @@
-import React, { useState, type ChangeEvent, type FormEvent } from 'react';
+import React, {useState, type ChangeEvent, type FormEvent} from 'react';
 
 
-
-import './NewsLetter.css';
-
-
-
+import './Newsletter.css';
 
 
 const NewsLetter: React.FC = () => {
 
 
     const [email, setEmail] = useState('');
-
-
-
 
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,9 +17,6 @@ const NewsLetter: React.FC = () => {
 
 
     };
-
-
-
 
 
     const handleSubmit = (e: FormEvent) => {
@@ -47,9 +37,6 @@ const NewsLetter: React.FC = () => {
     };
 
 
-
-
-
     return (
 
 
@@ -62,16 +49,15 @@ const NewsLetter: React.FC = () => {
                 <h2 className="newsletter-title">Subscribe to our Newsletter</h2>
 
 
-                <p className="newsletter-subtitle">Stay up to date with the latest posts and content from our community.</p>
-
-
-
+                <p className="newsletter-subtitle">Stay up to date with the latest posts and content from our
+                    community.</p>
 
 
                 <form onSubmit={handleSubmit} className="newsletter-form">
 
 
-                    <input type="email" value={email} onChange={handleInputChange} className='newsletter-input' placeholder='Enter your email' required/>
+                    <input type="email" value={email} onChange={handleInputChange} className='newsletter-input'
+                           placeholder='Enter your email' required/>
 
 
                     <button type='submit' className="newsletter-button">Subscribe</button>
@@ -90,9 +76,6 @@ const NewsLetter: React.FC = () => {
 
 
 };
-
-
-
 
 
 export default NewsLetter;
