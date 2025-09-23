@@ -6,13 +6,11 @@ import './PostList.css';
 // Define the props interface for PostList.
 interface IPostListProps {
   posts: IPost[];
-  onPostClick: () => void;
-  onEdit?: (post: IPost) => void;
-  onDelete?: (postId: string) => void;
+  onPostClick: (post: IPost) => void;
 }
 
 // The PostList component is responsible for mapping and rendering a list of PostCard components.
-const PostList: React.FC<IPostListProps> = ({ posts, onPostClick, onEdit, onDelete }) => {
+const PostList: React.FC<IPostListProps> = ({ posts, onPostClick}) => {
   if (!posts || posts.length === 0) {
     return <p className="no-posts-message">No posts available.</p>;
   }
@@ -20,7 +18,7 @@ const PostList: React.FC<IPostListProps> = ({ posts, onPostClick, onEdit, onDele
   return (
     <main className="post-list-grid">
       {posts.map(post => (
-        <PostCard key={post.id} post={post} onPostClick={onPostClick} onEdit={onEdit} onDelete={onDelete} />
+        <PostCard key={post.id} post={post} onPostClick={() => onPostClick(post)}/>
       ))}
     </main>
   );

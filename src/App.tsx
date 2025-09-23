@@ -4,6 +4,8 @@ import Dashboard from "./components/DashBoard";
 import { SidebarProvider } from './contexts/SidebarContext';
 import CreatePost from "./components/CreatePost";
 import Homepage from "./pages/Home";
+import ManagePosts from "./components/ManagePosts";
+import PostPage from "./components/PostPage";
 
 function App() {
   return (
@@ -17,11 +19,13 @@ function App() {
               
               {/*Create Post*/}
               <Route path="/create-post" element={<Layout><CreatePost/></Layout>} />
-              {/*Manage Post*/}
 
-          <Route path="/" element={<Homepage onPostClick={function (): void {
-            throw new Error("Function not implemented.");
-          }} />} />
+              {/*Manage Post*/}
+              <Route path="/manage-posts" element={<Layout><ManagePosts/></Layout>}/>
+
+              <Route path="/post/:id" element={<PostPage />} />
+
+          <Route path="/" element={<Homepage/>} />
         </Routes>
       </SidebarProvider>
     </>

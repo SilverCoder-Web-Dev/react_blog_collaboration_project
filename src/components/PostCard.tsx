@@ -2,6 +2,7 @@ import React from 'react';
 import './PostCard.css';
 import type { IPost } from '../services/apiHandling';
 
+
 // Define the props interface for PostCard.
 interface IPostCardProps {
   post: IPost;
@@ -13,9 +14,10 @@ interface IPostCardProps {
 
 // The PostCard component is responsible for displaying a single blog post.
 const PostCard: React.FC<IPostCardProps> = ({ post, onPostClick }) => {
+
   return (
     <div
-      onClick={() => onPostClick()}
+      onClick={onPostClick}
       
       className="post-card-container"
     >
@@ -38,7 +40,7 @@ const PostCard: React.FC<IPostCardProps> = ({ post, onPostClick }) => {
           {post.title}
         </h2>
         <p className="post-card-body">
-          {post.body}
+          {post.body.length > 60 ? `${post.body.substring(0, 60)}...` : post.body}
         </p>
         <div className="post-card-meta">
           <span className="post-card-meta-icon">

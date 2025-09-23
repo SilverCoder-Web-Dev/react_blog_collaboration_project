@@ -32,7 +32,6 @@
 
 .post-card-image {
   width: 100%;
-  height: 100%;
   object-fit: cover;
   transition-property: transform;
   transition-duration: 300ms;
