@@ -131,7 +131,7 @@
     backdrop-filter: blur(4px);
     white-space: nowrap;
     min-width: 80px;
-    min-height: 44px; /* Touch target */
+    min-height: 15px; /* Touch target */
     display: flex;
     align-items: center;
     justify-content: center;
