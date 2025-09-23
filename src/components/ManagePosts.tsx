@@ -6,6 +6,7 @@ import EditModal from './modals/EditModal';
 import DeleteModal from './modals/DeleteModal';
 import './ManagePosts.css';
 import { useSidebar } from '../contexts/SidebarContext';
+import Spinner from "./Spinner/Spinner.tsx";
 
 const ManagePosts: React.FC = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
@@ -114,6 +115,7 @@ const ManagePosts: React.FC = () => {
             <h1>Manage Posts</h1>
         </div>
         <p className="subtitle">Loading posts...</p>
+        <Spinner/>
       </div>
     );
   }

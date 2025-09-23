@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { getPosts, type IPost } from '../services/apiHandling';
 import { MdArrowBack, MdCalendarToday} from 'react-icons/md';
 import './PostPage.css';
+import Spinner from "./Spinner/Spinner.tsx";
 
 const PostPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -40,7 +41,8 @@ const PostPage: React.FC = () => {
     return (
       <div className="post-page">
         <div className="post-container">
-          <p>Loading post...</p>
+          {/*<p>Loading post...</p>*/}
+          <Spinner/>
         </div>
       </div>
     );

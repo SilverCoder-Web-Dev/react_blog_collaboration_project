@@ -32,10 +32,10 @@ const Navbar: React.FC = () => {
                     <div>
 
 
-                        <button className='primary-btn btn'>Login</button>
+                        {/*<button className='primary-btn btn'>Login</button>
 
 
-                        <button className='secondary-btn btn'>Signup</button>
+                        <button className='secondary-btn btn'>Signup</button>*/}
 
 
                     </div>

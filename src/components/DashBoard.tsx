@@ -18,7 +18,8 @@ import {
   MdAccessTime
 } from 'react-icons/md';
 import { BiNote } from 'react-icons/bi';
-import { useSidebar } from '../contexts/SidebarContext'; // 👈 Import context
+import { useSidebar } from '../contexts/SidebarContext';
+import Spinner from "./Spinner/Spinner.tsx"; // 👈 Import context
 
 const Dashboard: React.FC = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
@@ -114,6 +115,7 @@ const Dashboard: React.FC = () => {
           <div className="skeleton-card"></div>
           <div className="skeleton-card"></div>
         </div>
+        <Spinner/>
       </div>
     );
   }
