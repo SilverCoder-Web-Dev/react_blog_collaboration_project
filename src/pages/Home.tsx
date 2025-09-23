@@ -6,7 +6,7 @@ import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
 import NewsLetter from "../components/NewsLetter/NewsLetter";
 import About from "../components/About/About";
-import PostPage from "../components/PostPage";
+// import PostPage from "../components/PostPage";
 
 // Homepage component
 // export interface IPost {
@@ -22,7 +22,7 @@ import PostPage from "../components/PostPage";
 
 const Homepage: React.FC = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
-  const [selectedPost, setSelectedPost] = useState<IPost | null>(null);
+  // const [selectedPost, setSelectedPost] = useState<IPost | null>(null);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -32,12 +32,16 @@ const Homepage: React.FC = () => {
     fetchPosts();
   }, []);
 
-  // show single post page if one is selected
-  if (selectedPost) {
-    return (
-      <PostPage post={selectedPost} onBack={() => setSelectedPost(null)} />
-    );
+  function onPostClick(_post: IPost): void {
+    throw new Error("Function not implemented.");
   }
+
+  // // show single post page if one is selected
+  // if (selectedPost) {
+  //   return (
+  //     <PostPage post={selectedPost} onBack={() => setSelectedPost(null)} />
+  //   );
+  // }
 
   return (
     <div className="homepage-container">
@@ -59,7 +63,8 @@ const Homepage: React.FC = () => {
           <button className="homepage-button">View our Work</button>
 
         </header>
-        <PostList posts={posts} onPostClick={setSelectedPost} />
+        <PostList posts={posts} onPostClick={onPostClick} />
+        {/* <PostList posts={posts} onPostClick={setSelectedPost} /> */}
       </div>
       <NewsLetter/>
       <About/>
