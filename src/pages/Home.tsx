@@ -10,12 +10,23 @@ import Footer from "../components/Footer/Footer.tsx";
 
 const Homepage: React.FC = () => {
     const [posts, setPosts] = useState<IPost[]>([]);
+    const [loading, setLoading] = useState<boolean>(true); // 👈 Manage here
+    // const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const fetchedPosts = await getPosts();
-            setPosts(fetchedPosts.reverse());
+            try {
+                setLoading(true);
+                /*setError(null);*/
+                const fetchedPosts = await getPosts();
+                setPosts(fetchedPosts.reverse());
+            } catch (err) {
+                /*setError('Failed to load posts. Please try again later.');*/
+                console.error(err);
+            } finally {
+                setLoading(false); // 👈 Set false after fetch
+            }
         };
         fetchPosts();
     }, []);
@@ -47,7 +58,7 @@ const Homepage: React.FC = () => {
                 <h3 className="posts-header">Posts</h3>
 
                 {/* 👇 POST LIST */}
-                <PostList posts={posts} onPostClick={handlePostClick}/>
+                <PostList posts={posts} onPostClick={handlePostClick} loading={loading} />
             </div>
             <NewsLetter/>
             <About/>

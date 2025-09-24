@@ -5,7 +5,7 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(219, 234, 254, 0.6);
-    padding: 2.5rem 1rem;
+    padding: 0.7rem 1rem;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -96,7 +96,7 @@
 
 /* Animated Gradient Title */
 .navbar-title {
-    font-size: 1.25rem;
+    font-size: 2rem;
     font-weight: 800;
     letter-spacing: -0.025em;
     background: linear-gradient(90deg, #818cf8, #c084fc, #93c5fd, #f0abfc);
