@@ -103,11 +103,17 @@
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border: 1px solid #e2e8f0;
+  -webkit-overflow-scrolling: touch;
 }
+
 
 .posts-table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 0.95rem;
+  display: block; /* Ensures overflow-x works */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .posts-table th {

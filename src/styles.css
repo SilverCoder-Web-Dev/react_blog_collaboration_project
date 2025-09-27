@@ -168,9 +168,6 @@ body {
   display: flex;
 }
 
-/* .recents-icon{
-} */
-
 .section-header-title h2 {
   font-size: 1.75rem;
   font-weight: 700;
@@ -188,23 +185,54 @@ body {
 }
 
 /* MODERN TABLE */
+/* MODERN TABLE */
 .table-container {
   overflow-x: auto;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(8px);
   border: 1px solid var(--border);
+  -webkit-overflow-scrolling: touch; /* Smooth iOS scroll */
+  position: relative;
+}
+
+/* Optional: Scroll hint */
+.table-container::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 30px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8));
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.table-container:hover::after {
+  opacity: 1;
 }
 
 .modern-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.95rem;
+  display: block; /* Ensures overflow-x works */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent wrapping → force horizontal overflow */
+.modern-table th,
+.modern-table td {
+  white-space: nowrap;
+  padding: 1.25rem 1rem;
+  vertical-align: middle;
 }
 
 .modern-table th {
   background: linear-gradient(90deg, #EFF6FF, #DBEAFE, #EFF6FF);
-  padding: 1.25rem 1rem;
   text-align: left;
   font-weight: 600;
   color: var(--primary-dark);
@@ -216,9 +244,7 @@ body {
 }
 
 .modern-table td {
-  padding: 1.25rem 1rem;
   border-bottom: 1px solid var(--border);
-  vertical-align: middle;
 }
 
 .table-row {
